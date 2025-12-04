@@ -1,9 +1,10 @@
+# SOURCE: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: worker
   labels:
     app: worker
-  name: worker
 spec:
   replicas: 1
   selector:
@@ -15,5 +16,7 @@ spec:
         app: worker
     spec:
       containers:
-      - image: anupsutar/examplevotingapp_worker
-        name: worker
+        - name: worker
+          image: anupsutar/examplevotingapp_worker
+          ports:
+            - containerPort: 80

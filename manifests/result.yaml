@@ -1,0 +1,35 @@
+# SOURCE: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+  labels:
+    app: result
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+        - name: result
+          image: anupsutar/examplevotingapp_result
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: result
+  labels:
+    app: result
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: result
